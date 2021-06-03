@@ -81,9 +81,14 @@ RSpec.describe Spacecraft do
 
     it 'can add another ship' do
       odyssey = Spacecraft.new({name: 'Odyssey', fuel: 300})
-
+      @seventh_flotilla.add_personnel(@kathy)
+      @seventh_flotilla.add_personnel(@polly)
+      @seventh_flotilla.add_personnel(@rover)
+      @seventh_flotilla.add_personnel(@sampson)
+      
       odyssey.add_requirement({operations: 6})
       odyssey.add_requirement({maintenance: 3})
+      expect(@seventh_flotilla.recommend_personnel(odyssey)).to eq([@polly])
     end
   end
 end
