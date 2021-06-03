@@ -14,7 +14,7 @@ RSpec.describe Spacecraft do
     it 'has attributes' do
       seventh_flotilla = Flotilla.new({designation: 'Seventh Flotilla'})
 
-      expect(seventh_flotilla).to eq('Seventh Flotilla')
+      expect(seventh_flotilla.designation).to eq('Seventh Flotilla')
     end
   end
 end
