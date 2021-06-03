@@ -22,6 +22,7 @@ RSpec.describe Spacecraft do
     before :each do
       @seventh_flotilla = Flotilla.new({designation: 'Seventh Flotilla'})
       @daedalus = Spacecraft.new({name: 'Daedalus', fuel: 400})
+      @odyssey = Spacecraft.new({name: 'Odyssey', fuel: 300})
       @kathy = Person.new('Kathy Chan', 10)
       @kathy.add_specialty(:astrophysics)
       @kathy.add_specialty(:quantum_mechanics)
@@ -80,15 +81,29 @@ RSpec.describe Spacecraft do
     end
 
     it 'can add another ship' do
-      odyssey = Spacecraft.new({name: 'Odyssey', fuel: 300})
       @seventh_flotilla.add_personnel(@kathy)
       @seventh_flotilla.add_personnel(@polly)
       @seventh_flotilla.add_personnel(@rover)
       @seventh_flotilla.add_personnel(@sampson)
-      
-      odyssey.add_requirement({operations: 6})
-      odyssey.add_requirement({maintenance: 3})
-      expect(@seventh_flotilla.recommend_personnel(odyssey)).to eq([@polly])
+
+      @odyssey.add_requirement({operations: 6})
+      @odyssey.add_requirement({maintenance: 3})
+      expect(@seventh_flotilla.recommend_personnel(@odyssey)).to eq([@polly])
+    end
+
+    it 'can display personnel by ship' do
+      @seventh_flotilla.add_personnel(@kathy)
+      @seventh_flotilla.add_personnel(@polly)
+      @seventh_flotilla.add_personnel(@rover)
+      @seventh_flotilla.add_personnel(@sampson)
+
+      expect(@seventh_flotilla.ships).to eq([])
+
+      @seventh_flotilla.add_ship(@daedalus)
+      @seventh_flotilla.add_ship(@odyssey)
+
+      expect(@seventh_flotilla.ships).to eq([@daedalus, @odyssey])
+      expect(@seventh_flotilla.personnel_by_ship).to eq({})
     end
   end
 end
