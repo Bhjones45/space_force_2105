@@ -68,14 +68,22 @@ RSpec.describe Spacecraft do
       expect(@sampson.specialties).to eq([:astrophysics, :quantum_mechanics])
       expect(@seventh_flotilla.personnel).to eq([@kathy, @polly, @rover, @sampson])
     end
-    xit 'can recommend personnel to ship' do
 
+    it 'can recommend personnel to ship' do
+      @daedalus.add_requirement({astrophysics: 6})
+      @daedalus.add_requirement({quantum_mechanics: 3})
       @seventh_flotilla.add_personnel(@kathy)
       @seventh_flotilla.add_personnel(@polly)
       @seventh_flotilla.add_personnel(@rover)
       @seventh_flotilla.add_personnel(@sampson)
-      require 'pry';binding.pry
       expect(@seventh_flotilla.recommend_personnel(@daedalus)).to eq([@kathy, @sampson])
+    end
+
+    it 'can add another ship' do
+      odyssey = Spacecraft.new({name: 'Odyssey', fuel: 300})
+
+      odyssey.add_requirement({operations: 6})
+      odyssey.add_requirement({maintenance: 3})
     end
   end
 end
