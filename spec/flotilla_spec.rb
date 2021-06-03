@@ -27,8 +27,11 @@ RSpec.describe Spacecraft do
 
     it 'returns ships available' do
       seventh_flotilla = Flotilla.new({designation: 'Seventh Flotilla'})
+      daedalus = Spacecraft.new({name: 'Daedalus', fuel: 400})
 
       expect(seventh_flotilla.ships).to eq([])
+      seventh_flotilla.add_ship(daedalus)
+      expect(seventh_flotilla.ships).to eq([daedalus])
     end
   end
 end
