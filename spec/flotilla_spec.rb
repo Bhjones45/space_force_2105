@@ -35,9 +35,17 @@ RSpec.describe Spacecraft do
       @sampson.add_specialty(:astrophysics)
       @sampson.add_specialty(:quantum_mechanics)
     end
+
     it 'returns personnel' do
 
       expect(@seventh_flotilla.personnel).to eq([])
+    end
+
+    it 'can add requirements' do
+      expect(@daedalus.requirements).to eq([])
+      @daedalus.add_requirement({astrophysics: 6})
+      @daedalus.add_requirement({quantum_mechanics: 3})
+      expect(@daedalus.requirements).to eq([{astrophysics: 6}, {quantum_mechanics: 3}])
     end
 
     it 'returns ships available' do
@@ -48,6 +56,7 @@ RSpec.describe Spacecraft do
     end
 
     it 'can add personnel' do
+
       @seventh_flotilla.add_personnel(@kathy)
       @seventh_flotilla.add_personnel(@polly)
       @seventh_flotilla.add_personnel(@rover)
@@ -59,7 +68,14 @@ RSpec.describe Spacecraft do
       expect(@sampson.specialties).to eq([:astrophysics, :quantum_mechanics])
       expect(@seventh_flotilla.personnel).to eq([@kathy, @polly, @rover, @sampson])
     end
+    xit 'can recommend personnel to ship' do
+
+      @seventh_flotilla.add_personnel(@kathy)
+      @seventh_flotilla.add_personnel(@polly)
+      @seventh_flotilla.add_personnel(@rover)
+      @seventh_flotilla.add_personnel(@sampson)
+      require 'pry';binding.pry
+      expect(@seventh_flotilla.recommend_personnel(@daedalus)).to eq([@kathy, @sampson])
+    end
   end
-
-
 end
